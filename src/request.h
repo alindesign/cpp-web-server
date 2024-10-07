@@ -16,7 +16,7 @@ enum Method {
 class Request {
     std::string content;
     ssize_t content_length = 0;
-    const uint16_t buffer_size = 1024;
+    const u_int16_t buffer_size = 1024;
     int fd;
 
     void parse();

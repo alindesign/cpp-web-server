@@ -2,9 +2,9 @@
 #include <unistd.h>
 #include <sstream>
 #include <iomanip>
+#include <chrono>
 
 #include "response.h"
-
 
 std::string Response::nl = "\r\n";
 

@@ -1,10 +1,11 @@
+#include <csignal>
 #include <cstdlib>
 #include <iostream>
+#include "arpa/inet.h"
 
 #include "http_server.h"
 #include "request.h"
 #include "response.h"
-#include "arpa/inet.h"
 
 HttpServer server(INADDR_ANY, 8080);
 

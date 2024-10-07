@@ -31,7 +31,7 @@ public:
 
     void send();
 
-    void status_code(uint16_t i);
+    void status_code(u_int16_t i);
 };
 
 #endif //RESPONSE_H

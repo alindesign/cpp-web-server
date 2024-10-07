@@ -3,10 +3,13 @@
 #include <cstring>
 #include <sys/socket.h>
 #include <unistd.h>
-#include <arpa/inet.h>
 #include <csignal>
 #include <string>
 #include <thread>
+#include <vector>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include "common.h"
 #include "http_server.h"
@@ -116,7 +119,7 @@ void HttpServer::accepting_connections() const {
 
 void HttpServer::bootstrap() {
     printf("Trying to listen on http://%s:%d\n",
-           addr2ascii(AF_INET, &addr.sin_addr.s_addr, sizeof addr.sin_addr.s_addr, nullptr),
+           inet_ntoa(addr.sin_addr),
            ntohs(addr.sin_port));
 
     init_socket();
