@@ -18,3 +18,7 @@ $ cd build && meson compile
 
 $ ./cpp-web-server
 ```
+
+## Supported OSs
+- MacOS
+- Linux
