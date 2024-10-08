@@ -1,8 +1,8 @@
-project('passm', 'cpp',
+project('cpp-web-server', 'cpp',
         version : '1.0.0',
         default_options : ['warning_level=3', 'cpp_std=c++20'])
 
-passm = executable('passm',
+cppWebServer = executable('cpp-web-server',
                    'src/common.h',
                    'src/http_server.h',
                    'src/http_server.cpp',
@@ -13,4 +13,4 @@ passm = executable('passm',
                    'src/main.cpp',
                    install : true)
 
-test('test', passm)
+test('test', cppWebServer)

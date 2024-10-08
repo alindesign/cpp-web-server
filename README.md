@@ -16,5 +16,5 @@ $ meson setup build
 $ cd build && meson compile
 # Or meson compile -C build
 
-$ ./passm
+$ ./cpp-web-server
 ```
