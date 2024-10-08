@@ -1,6 +1,6 @@
-# PassM
+# C++ Web server
 
-A simple password manager application written in C++, to study and practice the language.
+A simple implementation of a webserver in C++, to study and practice the language.
 
 ## Requirements
 
