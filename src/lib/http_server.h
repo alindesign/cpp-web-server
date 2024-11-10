@@ -1,9 +1,8 @@
 #ifndef HTTP_SERVER_H
 #define HTTP_SERVER_H
 
-#include <netinet/in.h>
-
 #include <cstdint>
+#include <netinet/in.h>
 
 #include "request.h"
 #include "response.h"
@@ -17,7 +16,7 @@ class HttpServer {
 
   int server_bind{};
 
-  void (*request_handler)(const Request &req, Response &res){};
+  void (*request_handler)(const Request::Req &req, Response &res){};
 
   void init_addr(uint32_t addr, uint16_t port);
 
@@ -40,7 +39,7 @@ public:
 
   void bootstrap();
 
-  void handle(void (*handler)(const Request &req, Response &res));
+  void handle(void (*handler)(const Request::Req &req, Response &res));
 };
 
 #endif // HTTP_SERVER_H

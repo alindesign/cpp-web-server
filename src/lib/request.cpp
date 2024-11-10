@@ -1,12 +1,12 @@
-#include "request.h"
-
+#include <chrono>
+#include <string>
 #include <sys/socket.h>
 
-#include <string>
-
+#include <iostream>
 #include "logger.h"
+#include "request.h"
 
-void Request::read_from_socket() {
+void Request::Req::read_from_socket() {
   ssize_t bytes_read;
   do {
     content.resize(content_length + buffer_size);
@@ -24,7 +24,7 @@ void Request::read_from_socket() {
   parse();
 }
 
-void Request::parse() {
+void Request::Req::parse() {
   const auto method_end = content.find(' ');
   if (method_end == std::string::npos) {
     method = UNKNOWN;
@@ -38,4 +38,26 @@ void Request::parse() {
     method = POST;
   else
     method = UNKNOWN;
+}
+
+void Request::log_request(const Request::Req &req) {
+  std::stringstream log_stream;
+  const auto now = std::chrono::system_clock::now();
+  const auto in_time_t = std::chrono::system_clock::to_time_t(now);
+  log_stream << std::put_time(std::gmtime(&in_time_t),
+                              "[%d/%b/%Y:%H:%M:%S %z]");
+  log_stream << " " << Request::method_str(req.method) << " " << req.uri;
+
+  std::cerr << log_stream.str() << std::endl;
+}
+
+std::string Request::method_str(const Method &method) {
+  switch (method) {
+    case GET:
+      return "GET";
+    case POST:
+      return "POST";
+    default:
+      return "UNKNOWN";
+  }
 }

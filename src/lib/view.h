@@ -51,7 +51,7 @@ namespace View {
     explicit Node(const NodeType type, std::string value) :
         type(type), value(std::move(value)) {}
 
-    explicit Node(const NodeType node) : type(node){};
+    explicit Node(const NodeType node) : type(node) {};
 
     Node add_child(const Node& child);
 
@@ -64,25 +64,33 @@ namespace View {
     std::string render();
   };
 
+  Prop prop(const std::string& key, const std::string& value);
+
   NODE_ELEMENT_TEXT(text, NodeType::TEXT);
   NODE_ELEMENT_TEXT(css, NodeType::CSS);
   NODE_ELEMENT_TEXT(js, NodeType::JAVASCRIPT);
 
-  NODE_ELEMENT(title);
-  NODE_ELEMENT(style);
-  NODE_ELEMENT(head);
+  NODE_ELEMENT(aside);
   NODE_ELEMENT(body);
+  NODE_ELEMENT(div);
+  NODE_ELEMENT(footer);
   NODE_ELEMENT(h1);
   NODE_ELEMENT(h2);
   NODE_ELEMENT(h3);
   NODE_ELEMENT(h4);
   NODE_ELEMENT(h5);
   NODE_ELEMENT(h6);
-  NODE_ELEMENT(p);
-  NODE_ELEMENT(div);
-  NODE_ELEMENT(span);
+  NODE_ELEMENT(head);
   NODE_ELEMENT(header);
-  NODE_ELEMENT(footer);
+  NODE_ELEMENT(li);
+  NODE_ELEMENT(main);
+  NODE_ELEMENT(nav);
+  NODE_ELEMENT(ol);
+  NODE_ELEMENT(p);
+  NODE_ELEMENT(span);
+  NODE_ELEMENT(style);
+  NODE_ELEMENT(title);
+  NODE_ELEMENT(ul);
 
   inline Node fragment() {
     return Node(NodeType::FRAGMENT);

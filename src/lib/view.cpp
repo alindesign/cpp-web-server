@@ -62,3 +62,8 @@ std::string View::Node::render() {
 
   return stream.str();
 }
+
+
+View::Prop View::prop(const std::string &key, const std::string &value) {
+  return {key, value};
+}

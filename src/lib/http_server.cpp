@@ -1,14 +1,12 @@
 #include <arpa/inet.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include "unistd.h"
-
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <netinet/in.h>
 #include <string>
+#include <sys/socket.h>
+#include <sys/types.h>
 #include <thread>
 #include <vector>
 
@@ -88,12 +86,14 @@ void HttpServer::handle_request() const {
     panic(EXIT_FAILURE);
   }
 
-  Request req(client_fd);
+
+  Request::Req req(client_fd);
   Response res(client_fd);
 
   try {
     req.read_from_socket();
     res.status_code(HttpStatus::Code::OK);
+    log_request(req);
     request_handler(req, res);
   } catch (const std::exception &e) {
     res.status_code(HttpStatus::Code::INTERNAL_SERVER_ERROR);
@@ -132,6 +132,7 @@ void HttpServer::bootstrap() {
   accepting_connections();
 }
 
-void HttpServer::handle(void (*handler)(const Request &req, Response &res)) {
+void HttpServer::handle(void (*handler)(const Request::Req &req,
+                                        Response &res)) {
   request_handler = handler;
 }

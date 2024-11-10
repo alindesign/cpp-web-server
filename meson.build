@@ -1,8 +1,8 @@
 project(
-    'cpp-web-server',
-    'cpp',
-    version: '1.0.0',
-    default_options: ['warning_level=3', 'cpp_std=c++23'],
+  'cpp-web-server',
+  'cpp',
+  version: '1.0.0',
+  default_options: ['warning_level=3', 'cpp_std=c++23'],
 )
 
 sources = files(
@@ -19,7 +19,7 @@ sources = files(
   'src/lib/view.h',
 )
 
-main = executable('main', 'src/main.cpp', sources: sources, install: true)
+executable('main', 'src/main.cpp', sources: sources, install: true)
 
 test(
   'http_status test',

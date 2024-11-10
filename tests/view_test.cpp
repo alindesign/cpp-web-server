@@ -1,4 +1,5 @@
 #include <cassert>
+
 #include <src/lib/view.h>
 
 using namespace View;

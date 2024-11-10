@@ -7,6 +7,7 @@
 #include "lib/view.h"
 
 using namespace View;
+using namespace Request;
 
 HttpServer server(INADDR_ANY, 8080);
 
@@ -21,16 +22,21 @@ int main() {
   signal(SIGKILL, graceful_shutdown);
   signal(SIGTERM, graceful_shutdown);
 
-  server.handle([](const Request &req, Response &res) {
+  server.handle([](const Req &req, Response &res) {
     if (req.method == GET) {
       auto document = html(
           {
-             {"lang", "en"},
+              prop("lang", "en"),
           },
           {
               head({
                   title("Hello, World!"),
-                  style("body { background-color: #f0f0f0; }"),
+                  style(R"(
+                    body {
+                      background-color: #111;
+                      color: #fff;
+                    }
+                  )"),
               }),
               body({
                   h1({text("Hello, World!")}),

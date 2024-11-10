@@ -7,26 +7,35 @@
 #define STATUS_NOT_FOUND 404
 #define STATUS_INTERNAL_SERVER_ERROR 500
 
-enum Method {
-  UNKNOWN,
-  GET,
-  POST,
-};
 
-class Request {
-  std::string content;
-  ssize_t content_length = 0;
-  const u_int16_t buffer_size = 1024;
-  int fd;
+namespace Request {
+  enum Method {
+    UNKNOWN,
+    GET,
+    POST,
+  };
 
-  void parse();
+  class Req {
+    std::string content;
+    ssize_t content_length = 0;
+    const u_int16_t buffer_size = 1024;
+    int fd;
 
-public:
-  Method method;
+    void parse();
 
-  explicit Request(const int fd) : fd(fd), method() {}
+  public:
+    Method method;
+    std::string uri;
 
-  void read_from_socket();
-};
+    explicit Req(const int fd) : fd(fd), method() {}
+
+    void read_from_socket();
+  }; // class Req
+
+  void log_request(const Req &req);
+
+  std::string method_str(const Method &method);
+
+} // namespace Request
 
 #endif // REQUEST_H
